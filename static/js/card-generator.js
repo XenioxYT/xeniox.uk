@@ -74,3 +74,4 @@ class CardGenerator {
         return scene;
     }
 }
+
