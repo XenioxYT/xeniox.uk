@@ -1,0 +1,20 @@
+{
+  "blogs": [
+    {
+      "id": "welcome",
+      "title": "Welcome to the new portfolio",
+      "date": "Oct 15, 2025",
+      "tags": ["Intro"],
+      "excerpt": "A quick tour and what’s new."
+    },
+    {
+      "id": "site-architecture",
+      "title": "How this site works",
+      "date": "Oct 15, 2025",
+      "tags": ["Web", "JS"],
+      "excerpt": "Behind the scenes: data flow, animations, and security touches."
+    }
+  ]
+}
+
+
