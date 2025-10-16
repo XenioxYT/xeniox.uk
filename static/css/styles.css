@@ -1,0 +1,201 @@
+/* Metaball Background Container */
+.metaball-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: #000;
+    filter: contrast(30);
+}
+
+#metaball-canvas {
+    width: 100%;
+    height: 100%;
+    filter: blur(20px);
+}
+:root {
+    --bg-color: #0A0A0C;
+    --card-color: rgba(18, 18, 20, 0.6);
+    --border-color: rgba(255, 255, 255, 0.08);
+    --text-color: #EAEAEA;
+    --subtle-text-color: #888888;
+    --accent-color: #00BFFF;
+    --glow-color: rgba(0, 191, 255, 0.3);
+    --spotlight-color: rgba(0, 191, 255, 0.05);
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+        
+/* --- NEW: Glassmorphism and 3D Tilt Effect --- */
+.glass-card {
+    background-color: var(--card-color);
+    backdrop-filter: blur(20px) saturate(1000%);
+    -webkit-backdrop-filter: blur(20px) saturate(1000%);
+    border: 1px solid var(--border-color);
+    opacity: 1;
+    transition: all 0.3s ease, backdrop-filter 0.4s ease, -webkit-backdrop-filter 0.4s ease, opacity 0.4s ease;
+}
+
+.post-card {
+    opacity: 0;
+    animation: card-fade-in 0.5s ease-out forwards;
+    position: relative; /* Needed for the glow pseudo-element */
+    overflow: hidden; /* Hide the overflowing glow */
+    transition: opacity 0.4s ease;
+}
+
+/* True 3D Card wrappers */
+.card-scene { 
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+.card3d { 
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    position: relative;
+    will-change: transform;
+    transition: transform 0.15s ease-out, border-color 0.2s ease-out;
+    contain: content;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translateZ(0);
+}
+.card3d::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at var(--light-x, 50%) var(--light-y, 0%), rgba(255,255,255,0.25), rgba(255,255,255,0) 40%);
+    mix-blend-mode: screen;
+    opacity: var(--shine-o, 0);
+    transition: opacity 0.2s ease-out;
+}
+.card3d::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -12px;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 24px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0) 60%);
+    filter: blur(8px);
+    opacity: var(--shadow-o, 0);
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+.card-content { 
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- NEW: Shimmering Glow Effect --- */
+.post-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from var(--angle),
+        transparent 0%,
+        transparent 15%,
+        var(--accent-color) 22%,
+        transparent 28%,
+        transparent 45%,
+        rgba(0, 191, 255, 0.6) 52%,
+        transparent 58%,
+        transparent 75%,
+        var(--accent-color) 83%,
+        transparent 92%,
+        transparent 100%
+    );
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    filter: blur(35px);
+    transition: opacity 0.4s ease-in-out;
+    animation: rotate-glow 12s ease-in-out infinite paused;
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotate-glow {
+    0% { --angle: 0deg; }
+    50% { --angle: 180deg; }
+    100% { --angle: 360deg; }
+}
+
+.post-card:hover {
+    border-color: var(--accent-color);
+}
+        
+.post-card:hover::before {
+    opacity: 0.2;
+    animation-play-state: running;
+}
+
+/* Staggered animation delays */
+.post-card:nth-child(1) { animation-delay: 0.1s; }
+.post-card:nth-child(2) { animation-delay: 0.2s; }
+.post-card:nth-child(3) { animation-delay: 0.3s; }
+.post-card:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes card-fade-in {
+    to { opacity: 1; }
+}
+        
+.font-title { font-family: 'Teko', sans-serif; }
+.font-mono { font-family: 'Roboto Mono', monospace; }
+
+/* Prevent text selection globally - applied to body element above */
+
+/* Motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .post-card::before { animation: none; }
+    .post-card, .card3d, .card-content { transition: none !important; }
+}
+
+/* Blog View Animation States */
+.card-scene.card-hidden {
+    pointer-events: none;
+}
+
+.card-scene.card-hidden .post-card {
+    opacity: 0;
+    animation: none;
+}
+
+section.hero-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Ensure hero has transition */
+section.min-h-\[40vh\] {
+    transition: opacity 0.4s ease;
+}
+
+
