@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tom Lockwood | Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Roboto+Mono:wght@400;700&family=Teko:wght@600&display=swap" rel="stylesheet">
+    
+    <!-- Resource Hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/blog-content.css">
+    <link rel="stylesheet" href="/static/css/page-content.css">
+</head>
+<body class="antialiased">
+    
+    <!-- Metaball Background -->
+    <div class="metaball-container">
+        <canvas id="metaball-canvas"></canvas>
+    </div>
+
+    <div class="flex">
+        <!-- Fixed Sidebar Navigation -->
+        <aside class="w-64 min-h-screen p-8 fixed top-0 left-0 flex flex-col glass-card border-r border-l-0 border-t-0 border-b-0">
+            <h1 class="font-mono text-2xl font-bold tracking-widest">Tom Lockwood</h1>
+            <nav class="mt-12 flex flex-col space-y-6">
+                 <a href="#" id="home-link" class="text-lg font-semibold text-gray-300 hover:text-white transition-all duration-200 hover:pl-2 relative group">
+                    <span>Home</span>
+                    <span class="absolute -left-4 top-1/2 -translate-y-1/2 h-5 w-1 bg-accent-color opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
+                </a>
+                <a href="#page-about" data-page="about" class="text-lg font-semibold text-gray-300 hover:text-white transition-all duration-200 hover:pl-2 relative group">
+                    <span>About</span>
+                    <span class="absolute -left-4 top-1/2 -translate-y-1/2 h-5 w-1 bg-accent-color opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
+                </a>
+                <a href="#page-contact" data-page="contact" class="text-lg font-semibold text-gray-300 hover:text-white transition-all duration-200 hover:pl-2 relative group">
+                    <span>Contact</span>
+                    <span class="absolute -left-4 top-1/2 -translate-y-1/2 h-5 w-1 bg-accent-color opacity-0 group-hover:opacity-100 transition-opacity duration-200"></span>
+                </a>
+            </nav>
+            <div class="mt-auto text-xs font-mono" style="color: var(--subtle-text-color);">
+                <p>&copy; 2025 xeniox.uk</p>
+                <p>Designed with a custom touch.</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ml-64 w-full px-8 md:px-12 lg:px-16 py-12" style="perspective: 1000px;">
+            <!-- Hero Section -->
+            <section class="min-h-[40vh] flex flex-col justify-center mb-24">
+                <h2 class="font-title text-7xl md:text-8xl lg:text-9xl tracking-wider uppercase">Software Engineer & Creator</h2>
+                <p class="text-lg md:text-xl max-w-2xl mt-2" style="color: var(--subtle-text-color);">Hi, I'm Tom. A computer engineering graduate with a passion for building elegant solutions to complex problems. This is my corner of the internet to showcase projects and share what I'm learning.</p>
+            </section>
+
+            <!-- Project Card Grid -->
+            <section id="blog-card-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+                <!-- Blog cards will be dynamically inserted here -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Blog Container (Hidden by default) -->
+    <div id="blog-container" class="blog-container">
+        <div class="blog-glass-pane">
+            <div class="blog-content-wrapper" id="blog-content">
+                <!-- Blog content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Page Container (Hidden by default) -->
+    <div id="page-container" class="page-container">
+        <div class="page-glass-pane">
+            <div class="page-content-wrapper" id="page-content">
+                <!-- Page content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Close Button for Blog -->
+    <div id="blog-close-btn" class="blog-close-btn"></div>
+
+    <!-- Close Button for Pages -->
+    <div id="page-close-btn" class="page-close-btn"></div>
+
+    <script src="/static/js/cards.js" defer></script>
+    <script src="/static/js/card-generator.js" defer></script>
+
+    <!-- Metaball Animation Script -->
+    <script src="/static/js/metaballs.js" defer></script>
+    
+    <!-- Blog Viewer Script -->
+    <script src="/static/js/blog-viewer.js" defer></script>
+    
+    <!-- Page Viewer Script -->
+    <script src="/static/js/page-viewer.js" defer></script>
+</body>
+</html>
